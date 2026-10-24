@@ -33,10 +33,12 @@ archbox/
 │   ├── wezterm/wezterm.lua   # terminal (Nord)
 │   ├── nvim/                 # editor (lazy.nvim)
 │   ├── herdr/config.toml     # agent multiplexer keybinds
-│   ├── claude/settings.json  # Claude statusline (model + context %)
 │   └── opencode/AGENTS.md    # the shared agent policy (the real file)
-├── symlink_dot_claude_CLAUDE.md   # -> ~/.config/opencode/AGENTS.md
-└── symlink_dot_codex_AGENTS.md    # -> ~/.config/opencode/AGENTS.md
+├── dot_claude/
+│   ├── settings.json         # Claude statusline (model + context %)
+│   └── symlink_CLAUDE.md     # -> ~/.config/opencode/AGENTS.md
+└── dot_codex/
+    └── symlink_AGENTS.md     # -> ~/.config/opencode/AGENTS.md
 ```
 
 ## Fresh-machine setup
@@ -75,8 +77,7 @@ adopts files that already exist in `~`).
   if you don't want that; Kun Chen's original deliberately omits git identity.
 - **WezTerm background** - `wezterm.lua` points at `/home/sumit/Downloads/bg-console.png`,
   a local file that is not tracked. Point it at your own image or delete that layer.
-- **Neovim theme** - ships with rose-pine moon (from the original repo). Your terminal
-  is Nord; to match, edit `dot_config/nvim/lua/plugins/colorscheme.lua`.
+- **Neovim theme** - Nord (`shaunsingh/nord.nvim`), matching the terminal.
 - **herdr** - not in pacman. Install it from the AUR or build from source
   (https://github.com/herdrdev/herdr) before the `herdr/config.toml` does anything.
   It's optional.
