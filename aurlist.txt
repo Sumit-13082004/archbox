@@ -1,0 +1,6 @@
+cursor-bin
+google-chrome
+postman-bin
+ttf-ms-fonts
+wezterm-git
+wezterm-git-debug

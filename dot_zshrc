@@ -1,0 +1,61 @@
+# History
+HISTSIZE="10000"
+SAVEHIST="10000"
+HISTFILE="$HOME/.zsh_history"
+
+setopt HIST_FCNTL_LOCK HIST_IGNORE_DUPS HIST_IGNORE_SPACE SHARE_HISTORY \
+       NO_APPEND_HISTORY NO_EXTENDED_HISTORY NO_HIST_EXPIRE_DUPS_FIRST \
+       NO_HIST_FIND_NO_DUPS NO_HIST_IGNORE_ALL_DUPS NO_HIST_SAVE_NO_DUPS
+
+# Completions
+autoload -Uz compinit && compinit
+
+# Autosuggestions
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+ZSH_AUTOSUGGEST_STRATEGY=(history)
+bindkey '^f' autosuggest-accept
+
+# Editor + opencode (AUR build lives here)
+export EDITOR="nvim"
+export PATH="$HOME/.opencode/bin:$PATH"
+
+# WezTerm: report CWD so new tabs open in the right directory
+autoload -Uz add-zsh-hook
+function _update_cwd() {
+  printf "\e]7;file://%s%s\e\\" "$HOST" "$PWD"
+}
+add-zsh-hook chpwd _update_cwd
+_update_cwd
+
+# Prompt
+if [[ $TERM != "dumb" ]]; then
+  eval "$(starship init zsh)"
+fi
+
+# Aliases
+alias ..='cd ..'
+alias add='git add .'
+alias cc='claude --dangerously-skip-permissions'
+alias co='codex --full-auto'
+alias m='git switch main'
+alias pull='git pull'
+alias push='git push'
+
+# Syntax highlighting (source last)
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main)
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/sumit/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/sumit/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/sumit/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/sumit/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
