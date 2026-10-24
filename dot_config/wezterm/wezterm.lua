@@ -4,7 +4,7 @@ local config = wezterm.config_builder()
 
 config.automatically_reload_config = true
 config.enable_tab_bar = false
-config.windows_close_confirmation = "NeverPrompt"
+config.window_close_confirmation = "NeverPrompt"
 config.window_decorations = "RESIZE" -- no title bar, keep the resizable border
 config.default_cursor_style = "BlinkingBar"
 config.color_scheme = "Nord (Gogh)"
